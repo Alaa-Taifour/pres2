@@ -207,3 +207,15 @@ th {
   .dashboard-main { flex-direction: column; }
   .panel { height: 50vh; }
 }
+
+.utilities-panel {
+  width: 320px; flex-shrink: 0; padding: 1.5rem; background: #0f172a; border-radius: 16px;
+}
+.utility-subtitle { color: #94a3b8; font-size: 0.95rem; margin-bottom: 1rem; }
+.status-bar { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #334155; font-size: 0.9rem; color: #64748b; }
+
+@media (max-width: 1024px) {
+  .dashboard-main { flex-direction: column; }
+  .utilities-panel { width: 100%; }
+  .panel { height: 45vh; }
+}
