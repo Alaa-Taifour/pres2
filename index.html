@@ -4,162 +4,92 @@
   <meta charset="UTF-8">
   <title>SEO Strategy Dashboard | Golden Corn Export USA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Professional SEO Dashboard for Golden Corn Export USA & Axion Divisions">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .window {
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
-      transition: all 0.3s ease;
-    }
-    .window:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 35px 60px -15px rgb(0 0 0 / 0.5);
-    }
-    .utilities-panel {
-      background: #0f172a;
-      border-radius: 16px;
-      padding: 1.5rem;
-      height: fit-content;
-    }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
   <div class="dashboard-shell">
-    <!-- Header -->
     <header class="dashboard-header">
-      <div class="header-content">
+      <div>
         <h1>Golden Corn Export USA</h1>
         <p class="subtitle">SEO Strategy Dashboard • March 2026 • Prepared for Mr. Nawras by Alaa</p>
       </div>
-      
       <div class="kpi-section">
-        <p class="goal">🎯 Goal: 50–100 qualified B2B quotes/month in 6–9 months</p>
-        
-        <div class="chart-block">
-          <div class="chart-bars">
-            <div class="chart-bar"><span class="chart-label">NOW</span><div class="chart-bar-fill chart-bar-now"></div><span class="chart-value">\~800</span></div>
-            <div class="chart-bar"><span class="chart-label">MONTH 6</span><div class="chart-bar-fill chart-bar-mid"></div><span class="chart-value">12K</span></div>
-            <div class="chart-bar"><span class="chart-label">MONTH 12</span><div class="chart-bar-fill chart-bar-high"></div><span class="chart-value">28K+</span></div>
-          </div>
-        </div>
+        <p class="goal">🎯 50–100 qualified B2B quotes/month in 6–9 months</p>
+        <canvas id="trafficChart" width="320" height="110"></canvas>
       </div>
     </header>
 
     <main class="dashboard-main">
-      <!-- LEFT: SEO Report -->
+      <!-- SEO Report -->
       <section class="panel window">
-        <header class="panel-header">
-          <h2>📊 SEO Analytics & Optimization Report</h2>
-          <span>seo_report.html</span>
-        </header>
-        <div class="panel-body">
-          <iframe src="seo_report.html" class="panel-iframe" title="SEO Report"></iframe>
-        </div>
+        <header class="panel-header"><h2>📊 SEO Analytics & Optimization Report</h2><span>seo_report.html</span></header>
+        <div class="panel-body"><iframe src="seo_report.html" class="panel-iframe"></iframe></div>
       </section>
 
-      <!-- MIDDLE: Competitor Gap & Roadmap -->
+      <!-- Competitor Gap (Enhanced) -->
       <section class="panel window">
-        <header class="panel-header">
-          <h2>📋 Competitor Gap & 90-Day Roadmap</h2>
-          <span>competitor_gap.html</span>
-        </header>
-        <div class="panel-body">
-          <iframe src="competitor_gap.html" class="panel-iframe" title="Competitor Gap"></iframe>
-        </div>
+        <header class="panel-header"><h2>📋 Competitor Gap & 90-Day Roadmap</h2><span>competitor_gap.html</span></header>
+        <div class="panel-body"><iframe src="competitor_gap.html" class="panel-iframe"></iframe></div>
       </section>
 
-      <!-- RIGHT: Utilities / Download & Share -->
-      <div class="utilities-panel window" style="width: 320px; flex-shrink: 0;">
-        <h2 style="margin-top:0; color:#10b981;">⚡ Utilities & Export</h2>
-        <p style="color:#94a3b8; font-size:0.95rem;">Quick actions for this presentation</p>
+      <!-- Utilities Panel (NOW FIXED & BEAUTIFUL) -->
+      <div class="utilities-panel window">
+        <h2>⚡ Utilities & Export</h2>
+        <p class="utility-subtitle">Quick actions for this presentation</p>
+        
+        <button onclick="downloadPDF()" class="btn btn-primary">📄 Download Full Dashboard as PDF</button>
+        <button onclick="downloadReport('seo_report.html')" class="btn btn-secondary">📥 Download SEO Report (HTML)</button>
+        <button onclick="downloadReport('competitor_gap.html')" class="btn btn-secondary">📥 Download Competitor Gap (HTML)</button>
+        <button onclick="copyShareLink()" class="btn btn-secondary">🔗 Copy Shareable Link</button>
+        <button onclick="exportJSON()" class="btn btn-secondary">💾 Export Data as JSON</button>
+        <button onclick="sendEmail()" class="btn btn-secondary">✉️ Create Email Draft</button>
 
-        <div style="display:flex; flex-direction:column; gap:12px; margin-top:1.5rem;">
-          
-          <button onclick="downloadPDF()" class="btn btn-primary">
-            📄 Download Full Dashboard as PDF
-          </button>
-
-          <button onclick="downloadReport('seo_report.html')" class="btn btn-secondary">
-            📥 Download SEO Report (HTML)
-          </button>
-
-          <button onclick="downloadReport('competitor_gap.html')" class="btn btn-secondary">
-            📥 Download Competitor Gap (HTML)
-          </button>
-
-          <button onclick="copyShareLink()" class="btn btn-secondary">
-            🔗 Copy Shareable Link
-          </button>
-
-          <button onclick="exportJSON()" class="btn btn-secondary">
-            💾 Export Data as JSON
-          </button>
-
-          <button onclick="sendEmail()" class="btn btn-secondary">
-            ✉️ Create Email Draft
-          </button>
-
-          <hr style="border-color:#334155; margin:1rem 0;">
-          
-          <div style="font-size:0.85rem; color:#64748b;">
-            <strong>Status:</strong> Ready for presentation<br>
-            <strong>Date:</strong> March 26, 2026
-          </div>
+        <div class="status-bar">
+          <strong>Status:</strong> Ready for presentation<br>
+          <strong>Date:</strong> March 26, 2026
         </div>
       </div>
     </main>
   </div>
 
   <script>
-    function downloadPDF() {
-      alert("📄 Preparing high-quality PDF...\n\nIn real use, this would trigger window.print() with optimized styles.");
-      window.print();
-    }
+    // Chart.js Traffic Visualization
+    new Chart(document.getElementById('trafficChart'), {
+      type: 'line',
+      data: {
+        labels: ['Now', 'Week 4', 'Month 3', 'Month 6', 'Month 12'],
+        datasets: [{
+          label: 'Organic Visits',
+          data: [800, 3500, 8000, 15000, 28000],
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          tension: 0.4,
+          borderWidth: 4
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } }}
+    });
 
-    function downloadReport(filename) {
-      const link = document.createElement('a');
-      link.href = filename;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      alert(`✅ ${filename} download started!`);
+    function downloadPDF() { window.print(); }
+    function downloadReport(file) {
+      const a = document.createElement('a'); a.href = file; a.download = file; a.click();
+      alert('✅ ' + file + ' downloaded!');
     }
-
     function copyShareLink() {
-      const dummyLink = "https://demo.webtimizelocal.com/axion/seo-dashboard";
-      navigator.clipboard.writeText(dummyLink).then(() => {
-        alert("✅ Shareable link copied to clipboard!\n" + dummyLink);
-      });
+      navigator.clipboard.writeText('https://demo.webtimizelocal.com/axion/seo-dashboard');
+      alert('✅ Shareable link copied!');
     }
-
     function exportJSON() {
-      const data = {
-        project: "Golden Corn Export USA SEO Strategy",
-        date: "2026-03-26",
-        goal: "50-100 qualified quotes per month",
-        current_traffic: "\~800 visits",
-        projected_month6: "12,000 visits",
-        status: "Ready for execution"
-      };
-      const jsonStr = JSON.stringify(data, null, 2);
-      const blob = new Blob([jsonStr], { type: "application/json" });
+      const data = { project: "Golden Corn Export USA SEO", date: "2026-03-26", goal: "50-100 quotes/month", status: "On track" };
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = "golden-corn-seo-strategy.json";
-      a.click();
-      URL.revokeObjectURL(url);
-      alert("💾 JSON data exported successfully!");
+      const a = document.createElement('a'); a.href = url; a.download = "golden-corn-seo-strategy.json"; a.click();
+      alert('💾 JSON exported!');
     }
-
     function sendEmail() {
-      const subject = "SEO Strategy Dashboard - Golden Corn Export USA";
-      const body = "Hi Alaa,%0A%0APlease find the latest SEO Strategy Dashboard attached.%0A%0AKey Goal: 50–100 qualified B2B quotes/month.%0A%0ABest regards";
-      window.location.href = `mailto:your.email@example.com?subject=\( {subject}&body= \){body}`;
+      window.location.href = "mailto:mr.nawras@example.com?subject=SEO Strategy Dashboard - Golden Corn Export USA&body=Hi Mr. Nawras,%0A%0APlease find the latest SEO dashboard attached.";
     }
   </script>
 </body>
